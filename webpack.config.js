@@ -2,6 +2,7 @@ var path = require('path')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+    mode: "development",
     entry: [
         './src/app.js',
         './src/style.scss'
@@ -22,5 +23,6 @@ module.exports = {
             },
         ]
     },
-    plugins: [new HtmlWebpackPlugin({ template: 'src/index.html' })]
+    plugins: [new HtmlWebpackPlugin({ template: 'src/index.html' })],
+
 }

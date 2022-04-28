@@ -3,10 +3,11 @@ $card: white;
 $text: #b33;
 
 body{
+  height: 100vh;
   background: $background;
 }
 #app {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,6 +22,9 @@ body{
   &__segment {
     text-align: center;
 
+    .title{
+      padding: 0.75rem;
+    }
     .digits {
       display: flex;
       justify-content: center;
@@ -41,6 +45,11 @@ body{
           width: 13vw;
           z-index: 11;
           background: transparent;
+          overflow: hidden;
+        }
+        &__top,&__bottom,&__digit{
+          font-size: 10vw;
+          font-weight: bold;
         }
 
         &__top{
@@ -48,21 +57,42 @@ body{
           border-top-right-radius: 5px;
           box-shadow: 0 0 2px rgba(0, 0, 0, 0.5),
           0 0 0 rgba(0, 0, 0, 0.5);
+
+          &--flip {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            transform-origin: bottom;
+          }
         }
         &__bottom{
           border-bottom-left-radius: 5px;
           border-bottom-right-radius: 5px;
           box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5),
                       0 0 0 rgba(0, 0, 0, 0.5);
+
+          &--flip {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            transform-origin: bottom;
+          }
+          &__text {
+            position: relative;
+            bottom: 6vw;
+            color: #ccccbb;
+          }
         }
         &__digit{
           height: 0;
           z-index: 10;
-          font-size: 10vw;
-          font-weight: bold;
+          color: darkolivegreen;
         }
       }
     }
+  }
+}
 
+@keyframes flip {
+  100%{
+    transform: rotateX(90deg);
   }
 }

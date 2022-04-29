@@ -4,6 +4,7 @@ let prevDigits = [0,0,0,0,0,0]
 document.addEventListener('DOMContentLoaded', () => {
     let app = document.getElementById('app')
     app.innerHTML = clock(0, 0, 0)
+    app.insertAdjacentHTML('beforeend', `<a class="source" href="https://github.com/Mohammad1745/mechanical_clock">Source Code</a>`)
     runClock()
 })
 

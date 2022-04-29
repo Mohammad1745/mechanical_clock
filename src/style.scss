@@ -2,6 +2,7 @@
 
 $background: #ccb;
 $card: white;
+$shadow: rgba(0,0,0,0.25);
 $text: #b33;
 
 body{
@@ -12,8 +13,16 @@ body{
 #app {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.source{
+  position: absolute;
+  bottom: 2vw;
+  font-weight: 600;
+  color: #333;
 }
 
 .clock {
@@ -48,6 +57,7 @@ body{
           height: 6vw;
           width: 13vw;
           font-size: 10vw;
+          font-weight: 800;
           background: white;
           display: flex;
           justify-content: center;
@@ -58,7 +68,7 @@ body{
           align-items: flex-start;
           border-top-left-radius: 5px;
           border-top-right-radius: 5px;
-          box-shadow: -1px -2px 2px rgba(0,0,0,0.5);
+          box-shadow: -1px -2px 2px $shadow;
 
           &--flip {
             transform-origin: bottom;
@@ -67,10 +77,10 @@ body{
         &__bottom {
           align-items: flex-end;
           margin-top: 6vw;
-          border-top: 2px solid rgba(0,0,0,0.5);
+          border-top: 2px solid $shadow;
           border-bottom-left-radius: 5px;
           border-bottom-right-radius: 5px;
-          box-shadow: -1px 3px 2px rgba(0,0,0,0.5);
+          box-shadow: -1px 3px 2px $shadow;
 
           &--flip {
             transform-origin: top;

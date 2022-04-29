@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
 function runClock() {
     prevDigits = digits
     digits = clockDigits()
+    document.querySelectorAll('.card__top--flip').forEach(dom => {
+        dom.classList.remove('flip-top')
+    })
     digits.map((digit, index) => {
         if (digit !== prevDigits[index]) {
             changeDigit(index)
@@ -54,15 +57,10 @@ function cards(number) {
 function card(digit, id='card') {
     return `
         <div class="card" id="${id}">
-            <div class="card__digit">${digit}</div>
-            <div class="card__top">
-                <div class="card__top__text card__top--flip">${digit}</div>
-                <div class="card__top__text">${digit}</div>
-            </div>
-            <div class="card__bottom">
-                <div class="card__bottom__text card__bottom--flip">${digit}</div>
-                <div class="card__bottom__text">${digit}</div>
-            </div>
+            <div class="card__top card__top--fixed" id="card_top_fixed">0</div>
+            <div class="card__top card__top--flip" id="card_top_flip">0</div>
+            <div class="card__bottom card__bottom--fixed" id="card_bottom_fixed">0</div>
+            <div class="card__bottom card__bottom--flip" id="card_bottom_flip">0</div>
         </div>
     `
 }
@@ -81,11 +79,29 @@ function clockDigits(){
 }
 
 function changeDigit(index) {
-    let newCard = card(digits[index], 'new_card')
+    let digit = digits[index]
+    let prevDigit = prevDigits[index]
+
     let cards = document.querySelectorAll('.card')
-    cards[index].querySelector('.card__top').innerText = digits[index]
-    cards[index].querySelector('.card__digit').innerText = digits[index]
-    cards[index].querySelector('.card__bottom__text').innerText = digits[index]
-    let cardTop = cards[index].querySelector('.card__top')
-    // cardTop.style.transform = 'rotateX(90deg)'
+    let topFixed = cards[index].querySelector('.card__top--fixed')
+    let topFlip = cards[index].querySelector('.card__top--flip')
+    let bottomFixed = cards[index].querySelector('.card__bottom--fixed')
+    let bottomFlip = cards[index].querySelector('.card__bottom--flip')
+
+    topFixed.innerText = digit
+    topFlip.innerText = prevDigit
+    bottomFixed.innerText = prevDigit
+    bottomFlip.innerText = digit
+
+    topFlip.classList.add('top-flip')
+    bottomFlip.classList.add('bottom-flip')
+    bottomFlip.addEventListener('animationend', animationHandler(topFlip, bottomFlip, bottomFixed, digit))
+}
+function animationHandler(topFlip, bottomFlip, bottomFixed, digit) {
+    return event => {
+        topFlip.innerText = digit
+        bottomFixed.innerText = digit
+        topFlip.classList.remove('top-flip')
+        bottomFlip.classList.remove('bottom-flip')
+    }
 }

@@ -34,65 +34,64 @@ body{
         height: 12vw;
         width: 13vw;
         border-radius: 5px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
         background: $card;
         color: $text;
 
-        &__top,&__bottom{
+        &__top,
+        &__bottom {
+          position: absolute;
           height: 6vw;
           width: 13vw;
-          z-index: 11;
-          background: transparent;
+          font-size: 10vw;
+          background: white;
+          display: flex;
+          justify-content: center;
+          line-height: 1.2;
           overflow: hidden;
         }
-        &__top,&__bottom,&__digit{
-          font-size: 10vw;
-          font-weight: bold;
-        }
-
-        &__top{
+        &__top {
+          align-items: flex-start;
           border-top-left-radius: 5px;
           border-top-right-radius: 5px;
-          box-shadow: 0 0 2px rgba(0, 0, 0, 0.5),
-          0 0 0 rgba(0, 0, 0, 0.5);
 
           &--flip {
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
             transform-origin: bottom;
           }
         }
-        &__bottom{
+        &__bottom {
+          align-items: flex-end;
+          margin-top: 6vw;
+          border-top: 1px solid rgba(0,0,0,0.7);
           border-bottom-left-radius: 5px;
           border-bottom-right-radius: 5px;
-          box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5),
-                      0 0 0 rgba(0, 0, 0, 0.5);
 
           &--flip {
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-            transform-origin: bottom;
-          }
-          &__text {
-            position: relative;
-            bottom: 6vw;
-            color: #ccccbb;
+            transform-origin: top;
+            transform: rotateX(90deg);
           }
         }
-        &__digit{
-          height: 0;
-          z-index: 10;
-          color: darkolivegreen;
-        }
+      }
+      .top-flip {
+        animation: flip-top 250ms ease-in;
+      }
+      .bottom-flip {
+        animation: flip-bottom 250ms ease-out;
       }
     }
   }
 }
 
-@keyframes flip {
-  100%{
+@keyframes flip-top {
+  50%{
     transform: rotateX(90deg);
-  }
+  }100%{
+     transform: rotateX(90deg);
+   }
+}
+@keyframes flip-bottom {
+  50%{
+    transform: rotateX(90deg);
+  }100%{
+     transform: rotateX(0deg);
+   }
 }

@@ -3,7 +3,7 @@ let prevDigits = [0,0,0,0,0,0]
 
 document.addEventListener('DOMContentLoaded', () => {
     let app = document.getElementById('app')
-    app.innerHTML = clock(0, 0, 0)
+    app.innerHTML = clock()
     app.insertAdjacentHTML('beforeend', `<a class="source" href="https://github.com/Mohammad1745/mechanical_clock">Source Code</a>`)
     runClock()
 })
@@ -11,9 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function runClock() {
     prevDigits = digits
     digits = clockDigits()
-    document.querySelectorAll('.card__top--flip').forEach(dom => {
-        dom.classList.remove('flip-top')
-    })
+
     digits.map((digit, index) => {
         if (digit !== prevDigits[index]) {
             changeDigit(index)
@@ -25,10 +23,10 @@ function runClock() {
     }, 333)
 }
 
-function clock(hour, minute, second) {
-    let hourSegment = clockSegment('HOURS', cards(hour))
-    let minuteSegment = clockSegment('MINUTES', cards(minute))
-    let secondSegment = clockSegment('SECONDS', cards(second))
+function clock() {
+    let hourSegment = clockSegment('HOURS')
+    let minuteSegment = clockSegment('MINUTES')
+    let secondSegment = clockSegment('SECONDS')
 
     return `
         <div class="clock">
@@ -39,23 +37,17 @@ function clock(hour, minute, second) {
     `
 }
 
-function clockSegment(title, digits) {
+function clockSegment(title) {
     return `
         <div class="title">${title}</div>
         <div class="digits">
-            ${digits[0]}
-            ${digits[1]}
+            ${card()}
+            ${card()}
         </div>
     `
 }
 
-function cards(number) {
-    return number < 10 ?
-        [card(0), card(number)]
-        : [card(Math.floor(number/10)), card(number%10)]
-}
-
-function card(digit, id='card') {
+function card(id='card') {
     return `
         <div class="card" id="${id}">
             <div class="card__top card__top--fixed" id="card_top_fixed">0</div>

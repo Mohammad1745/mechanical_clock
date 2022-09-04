@@ -61,10 +61,11 @@ function card(id='card') {
 
 function clockDigits(){
     let date = new Date()
+    let hour = date.getHours() > 12 ? date.getHours()- 12 : (date.getHours()===0 ? 12 : date.getHours())
 
     return [
-        Math.floor(date.getHours()/10),
-        date.getHours()%10,
+        Math.floor(hour/10),
+        hour%10,
         Math.floor(date.getMinutes()/10),
         date.getMinutes()%10,
         Math.floor(date.getSeconds()/10),
